@@ -72,13 +72,30 @@ x = tf.constant([29.05088806,  27.61298943,  31.19073486,  29.35532951,
  27.88236427,  20.56035233,  30.20379066,  29.51215172,
  33.71149445,  28.59134293,  36.05556488,  28.66994858])
 
+params = tf.where(x > 30)
+
+with tf.Session() as sess:
+	res = sess.run(params)
+	print '1d)', res
+
+out = tf.gather(x, params)
+
+with tf.Session() as sess:
+	res = sess.run(out)
+	print '1d)', res
+
 ###############################################################################
 # 1e: Create a diagnoal 2-d tensor of size 6 x 6 with the diagonal values of 1,
 # 2, ..., 6
 # Hint: Use tf.range() and tf.diag().
 ###############################################################################
 
-# YOUR CODE
+diagonal = tf.range(1,7,1)
+out = tf.diag(diagonal)
+
+with tf.Session() as sess:
+	res = sess.run(out)
+	print '1e)', res
 
 ###############################################################################
 # 1f: Create a random 2-d tensor of size 10 x 10 from any distribution.
@@ -86,7 +103,12 @@ x = tf.constant([29.05088806,  27.61298943,  31.19073486,  29.35532951,
 # Hint: Look at tf.matrix_determinant().
 ###############################################################################
 
-# YOUR CODE
+x = tf.random_uniform([10,10])
+out = tf.matrix_determinant(x)
+
+with tf.Session() as sess:
+	res = sess.run(out)
+	print '1f)', res
 
 ###############################################################################
 # 1g: Create tensor x with value [5, 2, 3, 5, 10, 6, 2, 3, 4, 2, 1, 1, 0, 9].
@@ -94,7 +116,12 @@ x = tf.constant([29.05088806,  27.61298943,  31.19073486,  29.35532951,
 # Hint: use tf.unique(). Keep in mind that tf.unique() returns a tuple.
 ###############################################################################
 
-# YOUR CODE
+x = tf.constant([5, 2, 3, 5, 10, 6, 2, 3, 4, 2, 1, 1, 0, 9])
+out = tf.unique(x)
+
+with tf.Session() as sess:
+	res = sess.run(out)
+	print '1g)', res
 
 ###############################################################################
 # 1h: Create two tensors x and y of shape 300 from any normal distribution,
@@ -106,4 +133,9 @@ x = tf.constant([29.05088806,  27.61298943,  31.19073486,  29.35532951,
 # Hint: see the Huber loss function in the lecture slides 3.
 ###############################################################################
 
-# YOUR CODE
+x = tf.random_normal([300], mean=0.0, stddev=2.0, dtype=tf.float32)
+y = tf.random_normal([300], mean=0.0, stddev=2.0, dtype=tf.float32)
+
+
+
+
